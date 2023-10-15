@@ -48,3 +48,4 @@ int pop(struct stack *s)
 
 	return (s->items[s->topItemIndex--]);
 }
+

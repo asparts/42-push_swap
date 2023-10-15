@@ -14,7 +14,8 @@
 # define STACK_H
 
 #include <stdlib.h>
-
+#include "ftprintf/ft_printf.h"
+#include "libft/libft.h"
 /**
 * Stack data structure
 */
@@ -25,14 +26,10 @@ struct stack
 	int	*items;
 };
 
-struct stack* createNewStack(int size)
-{
-	struct stack *newStack = (struct stack*)malloc(sizeof(struct stack));
-	newStack->maxSize = size;
-	newStack->topItemIndex = -1; //TODO: change this probably
-	newStack->items = (int*)malloc(sizeof(int) * size);
-
-	return (newStack);
-}
+int isStackFull(struct stack *s);
+int isStackEmpty(struct stack *s);
+void push(struct stack *s, int x);
+int peek(struct stack *s);
+int pop(struct stack *s);
 
 #endif

@@ -10,17 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "main.h"
 #include "stack.h"
 #include "ftprintf/ft_printf.h"
 #include "libft/libft.h"
 
+//struct stack *s;
+
 int	main(int argc, char **argv)
 {
+	// struct stack *stackA;
+	// struct stack *stackB;
+
 	if (argc == 1) //TODO: display nothing, give prompt back?
 
-	if (validateInput(argc, &argv))
+	if (validateInput(argc, argv) == 0)
 		ft_printf("Error\n");
+	// stackA = createNewStack(argc - 1, argv);
+	// stackB = createNewStack(argc - 1, NULL);
 }
 
 /**
@@ -45,7 +52,7 @@ int validateInput(int argc, char **argv)
 		x = ft_atoi(argv[argc]);
 		if (x < -2147483648 || x > 2147483647)
 			return (0);
-		if(alreadyExists(x, argv, argc));
+		if(alreadyExists(x, argv, argc))
 			return (0);
 		j = 0;
 		argc--;
@@ -78,8 +85,8 @@ void swap(struct stack *s)
 	a = pop(s);
 	b = pop(s);
 
-	push(b);
-	push(a);
+	push(s, b);
+	push(s, a);
 }
 /**
  * Shift up all elements of stack by 1.
@@ -90,7 +97,7 @@ void rotate(struct stack *s)
 	int b;
 	struct stack *tempStack;
 
-	tempStack = createNewStack(s->topItemIndex + 1);
+	tempStack = createNewStack(s->topItemIndex + 1, NULL);
 	a = pop(s);
 
 	while(s->topItemIndex != -1)
@@ -104,6 +111,7 @@ void rotate(struct stack *s)
 		b = pop(tempStack);
 		push(s, b);
 	}
+	free(tempStack);
 }
 
 /**
@@ -115,7 +123,7 @@ void reverseRotate(struct stack *s)
 	int b;
 	struct stack *tempStack;
 
-	tempStack = createNewStack(s->topItemIndex + 1);
+	tempStack = createNewStack(s->topItemIndex + 1, NULL);
 	while (s->topItemIndex != 0)
 	{
 		a = pop(s);
@@ -127,5 +135,30 @@ void reverseRotate(struct stack *s)
 		a = pop(tempStack);
 		push(s, a);
 	}
-	push(s, a);
+	push(s, b);
+	free(tempStack);
+}
+
+struct stack* createNewStack(int size, char **args)
+{
+	int i;
+	int x;
+
+	i = 0;
+	struct stack *newStack = (struct stack*)malloc(sizeof(struct stack));
+	newStack->maxSize = size;
+	newStack->topItemIndex = -1; //TODO: change this probably
+	newStack->items = (int*)malloc(sizeof(int) * size);
+
+	if (args != NULL)
+	{
+		while (i != size)
+		{
+			x = ft_atoi(args[i]);
+			push(newStack, x);
+			i++;
+		}
+	}
+
+	return (newStack);
 }
