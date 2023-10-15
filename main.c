@@ -12,6 +12,7 @@
 
 #include "main.h"
 #include "stack.h"
+#include "radixsort.h"
 #include "ftprintf/ft_printf.h"
 #include "libft/libft.h"
 
@@ -30,16 +31,20 @@ int	main(int argc, char **argv)
 	//stackB = createNewStack(argc - 1, NULL);
 
 	printStack(stackA);
+	radixSort(stackA);
+	printStack(stackA);
 	//printStack(stackB);
 }
 
 void printStack(struct stack *s)
 {
 	int i;
-	while(s->size != 0)
+	i = 0;
+	while(i < s->size)
 	{
-		i = pop(s);
-		ft_printf("%d\n", i);
+		//i = pop(s);
+		ft_printf("%d\n", s->items[i]);
+		i++;
 	}
 }
 

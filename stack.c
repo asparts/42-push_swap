@@ -52,20 +52,3 @@ int pop(struct stack *s)
 	s->size--;
 	return (s->items[s->topItemIndex--]);
 }
-int getMax(struct stack *s)
-{
-	int max;
-	int i;
-
-	max = s->items[0];
-	i = 0;
-	while (i < s->topItemIndex)
-	{
-		if (s->items[i] > max)
-		{
-			max = s->items[i];
-		}
-		i++;
-	}
-	return (max);
-}
