@@ -14,18 +14,21 @@
 
 int isStackFull(struct stack *s)
 {
-    return (s->topItemIndex == s->maxSize - 1);
+	//TODO: delete if not needed
+    return (s->topItemIndex == s->size - 1);
 }
 
 int isStackEmpty(struct stack *s)
 {
-	return (s->topItemIndex == s->maxSize - 1);
+	//TODO: Make sure this works
+	return (s->topItemIndex == s->size - 1 && s->size != 0);
 }
 
 void push(struct stack *s, int x)
 {
 	//TODO: print pa (push a) or pb (push b)
 	
+	s->size++;
 	s->items[++s->topItemIndex] = x;
 }
 
@@ -43,9 +46,26 @@ int peek(struct stack *s)
 int pop(struct stack *s)
 {
 //TODO: prints
-	if (isStackEmpty(s))
+	if (isStackEmpty(s) != 1)
 		exit(EXIT_FAILURE);
 
+	s->size--;
 	return (s->items[s->topItemIndex--]);
 }
+int getMax(struct stack *s)
+{
+	int max;
+	int i;
 
+	max = s->items[0];
+	i = 0;
+	while (i < s->topItemIndex)
+	{
+		if (s->items[i] > max)
+		{
+			max = s->items[i];
+		}
+		i++;
+	}
+	return (max);
+}

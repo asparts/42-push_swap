@@ -19,15 +19,28 @@
 
 int	main(int argc, char **argv)
 {
-	// struct stack *stackA;
-	// struct stack *stackB;
+	 struct stack *stackA;
+	 //struct stack *stackB;
 
 	if (argc == 1) //TODO: display nothing, give prompt back?
 
 	if (validateInput(argc, argv) == 0)
 		ft_printf("Error\n");
-	// stackA = createNewStack(argc - 1, argv);
-	// stackB = createNewStack(argc - 1, NULL);
+	stackA = createNewStack(argc - 1, argv);
+	//stackB = createNewStack(argc - 1, NULL);
+
+	printStack(stackA);
+	//printStack(stackB);
+}
+
+void printStack(struct stack *s)
+{
+	int i;
+	while(s->size != 0)
+	{
+		i = pop(s);
+		ft_printf("%d\n", i);
+	}
 }
 
 /**
@@ -144,15 +157,16 @@ struct stack* createNewStack(int size, char **args)
 	int i;
 	int x;
 
-	i = 0;
+	i = 1;
 	struct stack *newStack = (struct stack*)malloc(sizeof(struct stack));
-	newStack->maxSize = size;
+	newStack->size = size;
 	newStack->topItemIndex = -1; //TODO: change this probably
 	newStack->items = (int*)malloc(sizeof(int) * size);
 
 	if (args != NULL)
 	{
-		while (i != size)
+	newStack->size = 0;
+		while (i <= size)
 		{
 			x = ft_atoi(args[i]);
 			push(newStack, x);

@@ -22,6 +22,7 @@ void swap(struct stack *s);
 void rotate(struct stack *s);
 void reverseRotate(struct stack *s);
 struct stack* createNewStack(int size, char **args);
+void printStack(struct stack *s);
 
 
 #endif

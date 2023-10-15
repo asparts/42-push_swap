@@ -21,7 +21,7 @@
 */
 struct stack
 { //TODO: do i need char for determining stack name..?
-	int	maxSize;
+	int	size;
 	int	topItemIndex;
 	int	*items;
 };
